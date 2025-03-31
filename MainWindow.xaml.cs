@@ -28,14 +28,14 @@ namespace Sports
             InitializeComponent();
 
             Manager.MainFrame = MainFrame;
-            //Manager.DB = new SportEntities1();
-            //Manager.Roles = Manager.DB.Roles.ToArray();
+            Manager.DB = new SportEntities1();
+            Manager.Roles = Manager.DB.Roles.ToArray();
 
-            //VisibilityController.SetButtonVisibility<LoginPage>(LoginButton, () => Manager.IsGuest);
-            //VisibilityController.SetButtonVisibility<CataloguePage>(CatalogueButton, () => true);
-            //VisibilityController.SetButtonVisibility<AdminPage>(AdminButton, () => LoginPage.FindRole(Manager.User)?.Name == "Администратор");
+            VisibilityController.SetButtonVisibility<LoginPage>(LoginButton, () => Manager.IsGuest);
+            VisibilityController.SetButtonVisibility<CataloguePage>(CatalogueButton, () => true);
+            VisibilityController.SetButtonVisibility<AdminPage>(AdminButton, () => LoginPage.FindRole(Manager.User)?.Name == "Администратор");
 
-            MainFrame.Navigate(new AdminPage());
+            MainFrame.Navigate(new CataloguePage());
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
