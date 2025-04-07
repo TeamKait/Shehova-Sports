@@ -88,8 +88,16 @@ namespace Sports.Pages
             _product.Price = price;
             _product.ManufacturerId = manufacturerId;
 
-            MessageBox.Show("Продукт успешно обновлён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            Classes.Manager.MainFrame.Navigate(new AdminPage());
+            try
+            {
+                Classes.Manager.DB.SaveChanges();
+                MessageBox.Show("Продукт успешно обновлён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                Classes.Manager.MainFrame.Navigate(new AdminPage());
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Ошибка при обновлении продукта.\nСодержание:\n" + e, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
