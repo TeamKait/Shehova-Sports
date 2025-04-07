@@ -33,9 +33,9 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Name}" FontWeight="Bold"></TextBlock>
                             <TextBlock Text="{Binding Category}"></TextBlock>
-                            <TextBlock Text="{Binding Discount}">Скидка: </TextBlock>
-                            <TextBlock Text="{Binding Stock}">В наличии: </TextBlock>
-                            <TextBlock Text="{Binding Price}">Цена:</TextBlock>
+                            <TextBlock Text="{Binding Discount, StringFormat='Скидка: {0}%'}"></TextBlock>
+                            <TextBlock Text="{Binding Stock, StringFormat='В наличии: {0}'}"></TextBlock>
+                            <TextBlock Text="{Binding Price, StringFormat='Цена: {0}₽'}"></TextBlock>
                             <Button Margin="0,20,0,0" Click="HandleBuyButton">Купить</Button>
                         </StackPanel>
                     </Border>

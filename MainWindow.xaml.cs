@@ -55,5 +55,15 @@ namespace Sports
         {
             VisibilityController.CheckButtons();
         }
+
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AdminPage());
+        }
+
+        private void CatalogueButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new CataloguePage());
+        }
     }
 }

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using Sports.Classes;
 
 namespace Sports.Pages
 {
@@ -43,11 +44,11 @@ namespace Sports.Pages
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
-                !int.TryParse(CategoryIdTextBox.Text, out int categoryId) ||
-                !int.TryParse(DiscountTextBox.Text, out int discount) ||
-                !int.TryParse(StockTextBox.Text, out int stock) ||
-                !decimal.TryParse(PriceTextBox.Text, out decimal price) ||
-                !int.TryParse(ManufacturerIdTextBox.Text, out int manufacturerId))
+                !int.TryParse(CategoryIdTextBox.Text, out int categoryId) || categoryId < 0 ||
+                !int.TryParse(DiscountTextBox.Text, out int discount) || discount < 0 || discount > 100 ||
+                !int.TryParse(StockTextBox.Text, out int stock) || stock < 0 ||
+                !decimal.TryParse(PriceTextBox.Text, out decimal price) || price < 0 ||
+                !int.TryParse(ManufacturerIdTextBox.Text, out int manufacturerId) || manufacturerId < 0)
             {
                 MessageBox.Show("Пожалуйста, заполните все поля корректно.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -55,7 +56,7 @@ namespace Sports.Pages
 
             Product newProduct = new Product
             {
-                Id = new Random().Next(1000), // Генерация ID
+                Id = Manager.DB.Product.Max(item => item.Id) + 1,
                 Name = NameTextBox.Text,
                 Image = _imageData,
                 CategoryId = categoryId,
@@ -65,8 +66,17 @@ namespace Sports.Pages
                 ManufacturerId = manufacturerId
             };
 
-            MessageBox.Show("Продукт успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.GoBack();
+            try
+            {
+                Manager.DB.Product.Add(newProduct);
+                Manager.DB.SaveChanges();
+                MessageBox.Show("Продукт успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                Manager.MainFrame.Navigate(new AdminPage());
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"При добавлении товара произошла ошибка.\nСодержание:\n{ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

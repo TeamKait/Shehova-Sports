@@ -21,21 +21,17 @@ namespace Sports.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
-        private List<Product> _products;
+        private List<Product> _products => Classes.Manager.DB.Product.ToList();
 
         public AdminPage()
         {
             InitializeComponent();
-            LoadProducts();
+            UpdateDataGrid();
         }
 
-        private void LoadProducts()
+        private void UpdateDataGrid()
         {
-            _products = new List<Product>
-            {
-                new Product { Id = 1, Name = "Product A", CategoryId = 1, Discount = 10, Stock = 50, Price = 99.99m, ManufacturerId = 2 },
-                new Product { Id = 2, Name = "Product B", CategoryId = 2, Discount = 5, Stock = 30, Price = 49.99m, ManufacturerId = 3 }
-            };
+            ProductsDataGrid.ItemsSource = null;
             ProductsDataGrid.ItemsSource = _products;
         }
 
@@ -75,8 +71,8 @@ namespace Sports.Pages
                 {
                     _products.Remove(product);
                 }
-                ProductsDataGrid.ItemsSource = null;
-                ProductsDataGrid.ItemsSource = _products;
+                Classes.Manager.DB.SaveChanges();
+                UpdateDataGrid();
             }
         }
     }

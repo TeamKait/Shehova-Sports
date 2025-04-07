@@ -16,8 +16,8 @@
         <Grid Grid.Row="0" Background="#76e383">
             <Image HorizontalAlignment="Left" Margin="150,0,0,0" Source="Resources/logo.png"></Image>
             <TextBlock Margin="230,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold" Text="Спортивные товары"></TextBlock>
-            <Button x:Name="CatalogueButton" Content="Каталог" Margin="450,0,0,0"/>
-            <Button x:Name="AdminButton" Content="Админ-панель" Margin="817,0,0,0"/>
+            <Button x:Name="CatalogueButton" Content="Каталог" Margin="450,0,0,0" Click="CatalogueButton_Click"/>
+            <Button x:Name="AdminButton" Content="Админ-панель" Margin="817,0,0,0" Click="AdminButton_Click"/>
             <Button x:Name="LoginButton" Content="Войти" Margin="817,0,0,0" Click="LoginButton_Click"/>
         </Grid>
         <Frame Grid.Row="1"

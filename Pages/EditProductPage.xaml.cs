@@ -89,7 +89,7 @@ namespace Sports.Pages
             _product.ManufacturerId = manufacturerId;
 
             MessageBox.Show("Продукт успешно обновлён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.GoBack();
+            Classes.Manager.MainFrame.Navigate(new AdminPage());
         }
     }
 }
