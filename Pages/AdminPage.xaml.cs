@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Sports.Classes;
 
 namespace Sports.Pages
 {
@@ -21,7 +22,6 @@ namespace Sports.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
-        private List<Product> _products => Classes.Manager.DB.Product.ToList();
 
         public AdminPage()
         {
@@ -32,7 +32,7 @@ namespace Sports.Pages
         private void UpdateDataGrid()
         {
             ProductsDataGrid.ItemsSource = null;
-            ProductsDataGrid.ItemsSource = _products;
+            ProductsDataGrid.ItemsSource = Manager.DB.Product.ToList();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace Sports.Pages
             {
                 foreach (var product in selectedProducts)
                 {
-                    _products.Remove(product);
+                    Manager.DB.Product.Remove(product);
                 }
                 Classes.Manager.DB.SaveChanges();
                 UpdateDataGrid();

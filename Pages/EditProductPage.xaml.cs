@@ -70,11 +70,11 @@ namespace Sports.Pages
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
-                !int.TryParse(CategoryIdTextBox.Text, out int categoryId) ||
-                !int.TryParse(DiscountTextBox.Text, out int discount) ||
-                !int.TryParse(StockTextBox.Text, out int stock) ||
-                !decimal.TryParse(PriceTextBox.Text, out decimal price) ||
-                !int.TryParse(ManufacturerIdTextBox.Text, out int manufacturerId))
+                !int.TryParse(CategoryIdTextBox.Text, out int categoryId) || categoryId < 0 ||
+                !int.TryParse(DiscountTextBox.Text, out int discount) || discount < 0 || discount > 100 ||
+                !int.TryParse(StockTextBox.Text, out int stock) || stock < 0 ||
+                !decimal.TryParse(PriceTextBox.Text, out decimal price) || price < 0 ||
+                !int.TryParse(ManufacturerIdTextBox.Text, out int manufacturerId) || manufacturerId < 0)
             {
                 MessageBox.Show("Пожалуйста, заполните все поля корректно.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -94,9 +94,9 @@ namespace Sports.Pages
                 MessageBox.Show("Продукт успешно обновлён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 Classes.Manager.MainFrame.Navigate(new AdminPage());
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-                MessageBox.Show("Ошибка при обновлении продукта.\nСодержание:\n" + e, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка при обновлении продукта.\nСодержание:\n" + ex, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

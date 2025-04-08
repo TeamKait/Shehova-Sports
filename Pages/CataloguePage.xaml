@@ -10,7 +10,7 @@
       Title="ИС Спортивные товары - Каталог">
 
     <Grid>
-        <ListView x:Name="ListView">
+        <ListView x:Name="ListView" Margin="0,66,0,0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Focusable" Value="False"/>
@@ -42,5 +42,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBox HorizontalAlignment="Right" 
+                 Name="SearchBox"
+                 Height="50" 
+                 Margin="0,8,12,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="210" 
+                 VerticalContentAlignment="Center" 
+                 TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>
